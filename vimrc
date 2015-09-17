@@ -1,61 +1,92 @@
-let g:fb_kill_whitespace = 0
-source $ADMIN_SCRIPTS/master.vimrc
-"setlocal foldmethod=syntax
-" Note, perl automatically sets foldmethod in the syntax file
-autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=syntax
-autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
-set hlsearch
-
-:color fjc
-
 set number
-map <space> viw
-inoremap <c-u> <esc>viwUwa
-let mapleader = "-"
-nnoremap <leader>d dd
-noremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader> bi"<esc>ea"<esc>
+set hlsearch
+syntax on
 
-inoremap kj <esc>
-inoremap <esc> <nop>
-vnoremap kj <esc>
-vnoremap <esc> <nop>
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+execute pathogen#infect()
+filetype plugin indent on
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 
+inoremap kj <Esc>
+vnoremap kj <Esc>
+imap <F2> GoDate: <Esc>:read !date<CR>kJ
+cmap kj <Esc> 
 
-" Highlight all instances of word under cursor, when idle.
-" " Useful when studying strange source code.
-" " Type z/ to toggle highlighting on/off.
-nnoremap hla :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
-function! AutoHighlightToggle()
-  let @/ = ''
-  if exists('#auto_highlight')
-    au! auto_highlight
-    augroup! auto_highlight
-      setl updatetime=4000
-      echo 'Highlight current word: off'
-      return 0
-  else
-    augroup auto_highlight
-      au!
-      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-    augroup end
-    setl updatetime=500
-    echo 'Highlight current word: ON'
-    return 1
-  endif
-endfunction
-
-nnoremap hl :call SingleHighLightToggle()<CR>
+nnoremap <leader>h :call SingleHighLightToggle()<CR>
+let s:lastSearchWord=''
 function! SingleHighLightToggle()
-  if @/ == ''
-    let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-  else
-    let @/ = ''
-  endif
+    let b:currentWord = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    if @/ == '' || s:lastSearchWord == '' || @/ != s:lastSearchWord || s:lastSearchWord != b:currentWord
+        let @/ = b:currentWord
+        let s:lastSearchWord=@/
+    else
+        let @/ = ''
+        let s:lastSearchWord = ''
+    endif
 endfunction
+
+
+let mapleader = "-"
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>a :call FuncPush()<cr>
+nnoremap <leader>s :call FuncPop()<cr>
+nnoremap <leader>r :call FuncResize()<cr>
+nnoremap <leader>q :q!<cr>
+
+let s:dep=0
+
+function! FuncResize()
+    let s:f=5
+    execute "normal :resize 5\<CR>"
+    echo "normal :resize ".s:dep."\<CR>"
+endfunction
+
+function! FuncPush()
+    let s:str=getline(".")
+    if s:dep==0
+        set splitbelow
+        execute '1split traceback'
+        execute "normal Gi".s:str."\<Esc>"
+        execute "normal \<c-w>\<c-w>"
+    else
+        execute "normal \<c-w>\<c-w>"
+        let s:size=s:dep+1
+        execute "normal :resize ".s:size."\<cr>"
+        execute "normal Go".s:str."\<Esc>"
+        execute "normal \<Esc>"
+        execute "normal \<c-w>\<c-w>"
+    endif
+    let s:dep+=1
+endfunction
+
+function! FuncPop()
+    let s:dep-=1
+    if s:dep==0
+        execute "normal \<c-w>\<c-w>"
+        execute "normal :q!\<CR>"
+    elseif s:dep >0
+        execute "normal \<c-w>\<c-w>"
+        let s:size=s:dep+1
+        execute "normal :resize ".s:size."\<cr>"
+        execute "normal Gdd"
+        execute "normal \<Esc>"
+        execute "normal \<c-w>\<c-w>"
+    endif
+    
+endfunction
+
+function! TestFunc()
+    echom 'func1'
+    echom 'func2'
+    echom 'func3'
+    normal <cr>
+endfunction
+command! FJC :call TestFunc()
 
 nmap <F8> :TagbarToggle<CR>
-execute pathogen#infect()
-map <F9> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
