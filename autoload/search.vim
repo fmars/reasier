@@ -1,9 +1,10 @@
 let s:lastSearchWord=''
-function! SingleHighLightToggle()
-    let b:currentWord = '\V\<'.escape(expand('<cword>'), '\').'\>'
-    if @/ == '' || s:lastSearchWord == '' || @/ != s:lastSearchWord || s:lastSearchWord != b:currentWord
-        let @/ = b:currentWord
+function! search#SingleHighLightToggle()
+    let s:currentWord = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    if @/ == '' || s:lastSearchWord == '' || @/ != s:lastSearchWord || s:lastSearchWord != s:currentWord
+        let @/ = s:currentWord
         let s:lastSearchWord=@/
+        return ":silent set hlsearch\<CR>"
     else
         let @/ = ''
         let s:lastSearchWord = ''
