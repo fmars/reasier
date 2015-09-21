@@ -1,16 +1,3 @@
-set number
-set hlsearch
-syntax on
-
-filetype plugin indent on
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-execute pathogen#infect()
-filetype plugin indent on
-map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 
 inoremap kj <Esc>
