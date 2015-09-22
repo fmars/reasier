@@ -4,6 +4,7 @@ function! search#SingleHighLightToggle()
     if @/ == '' || s:lastSearchWord == '' || @/ != s:lastSearchWord || s:lastSearchWord != s:currentWord
         let @/ = s:currentWord
         let s:lastSearchWord=@/
+        execute "set tagstack?"
         return ":silent set hlsearch\<CR>"
     else
         let @/ = ''
