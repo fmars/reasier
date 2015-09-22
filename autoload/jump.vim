@@ -73,5 +73,4 @@ function! jump#FuncPop()
         execute "normal \<Esc>"
         execute "normal \<c-w>\<c-w>"
     endif
-    
 endfunction
