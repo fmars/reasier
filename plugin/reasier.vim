@@ -1,24 +1,13 @@
-let mapleader = "-"
-
-inoremap kj <Esc>
-vnoremap kj <Esc>
-inoremap <Esc> <Nop>
-vnoremap <Esc> <Nop>
-
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-nnoremap <leader>q :q!<cr>
-nnoremap <leader>w :wq<cr>
-
+command! -nargs=0 SHLSearch call search#SingleHighLightToggle()
 nnoremap <silent> <expr> <leader>f search#SingleHighLightToggle()
-
-nnoremap <leader>a :call jump#FuncPush()<cr>
-nnoremap <leader>s :call jump#FuncPop()<cr>
-nnoremap <leader>r :call jump#FuncResize()<cr>
-
 
 nnoremap <leader>g :call jump#GetTagStack()<cr>
 nnoremap <leader>d :call jump#DisplayTagStack()<cr>
 nnoremap <leader>j :call jump#Jump()<cr>
 
-nnoremap <c-]> :call jump#JumpForward()<cr>
+
+nnoremap <F7> :ReasierJump<Cr>
+command! -nargs=0 Reasier call jump#ToggleWindow()
+command! -nargs=0 ReasierJump call jump#JumpForward()
+
+nnoremap <C-]> :call jump#JumpForward()<cr>

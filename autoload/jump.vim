@@ -1,30 +1,94 @@
+let g:tag_stack_visibility = 1
+let s:debug_file = ''
+let s:debug_toggle = 1
+function! s:StartDebug(filename) abort
+    if empty(a:filename)
+        let s:debug_file = 'reasier.log'
+    else
+        let s:debug_file = a:filename
+    endif
+endfunction
+call s:StartDebug('')
+
+function! s:debug(msg)
+    if s:debug_toggle
+        execute 'redir >> ' . s:debug_file
+        silent echon a:msg . "\n"
+        redir END
+    endif
+endfunction
+
+function! s:goto_win(winnr, ...) abort
+    let cmd = type(a:winnr) == type(0) ? a:winnr . 'wincmd w'
+                \ : 'wincmd ' . a:winnr
+    let noauto = a:0 > 0 ? a:1 : 0
+
+    call s:debug("goto_win(): " . cmd . ", " . noauto)
+
+    if noauto
+        noautocmd execute cmd
+    else
+        execute cmd
+    endif
+endfunction
+
 let g:currentWord=''
 function! jump#JumpForward()
-    let g:currentWord = escape(expand('<cword>'), '\')
-    echo g:currentWord
-    execute 'tag '.g:currentWord
-    call jump#GetTagStack()
-    call jump#DisplayTagStack()
+    call s:debug('JumpForward called')
+
+    let currentWord = escape(expand('<cword>'), '\')
+    call s:debug('Current word is '.currentWord)
+    execute 'tag '.currentWord
+    call s:GetTagStack()
+    call s:DisplayTagStack()
 endfunction
 
-
-let g:tag_stack=''
+" ----------------------------------
+" GetTagStack()
 function! jump#GetTagStack()
-    execute 'redir => g:tag_stack'
+    call s:GetTagStack()
+endfunction
+
+let s:tag_stack = []
+let s:tag_stack_display = []
+function! s:GetTagStack()
+    call s:debug('GetTagStack called')
+
+    execute 'redir => tag_stack_str'
     execute 'silent tags'
     redir END
+    let s:tag_stack = split(tag_stack_str, '\n')
+    call s:debug('Current TagStack len is '.len(s:tag_stack))
 endfunction
 
+" ----------------------------------
+" DisplayTagStack()
 function! jump#DisplayTagStack()
-    set splitbelow
-    let s:list=split(g:tag_stack,'\n')
-    let s:len=len(s:list)
-    echo 's:len'.s:len
-    let s:cmd=s:len.'split abc'
-    echo s:cmd
-    execute s:cmd
-    execute "normal Gi".g:tag_stack."\<Esc>"
-    execute "normal \<c-w>\<c-w>"
+    call s:DisplayTagStack()
+endfunction
+
+function! s:DisplayTagStack()
+    call s:debug('DisplayTagStack called')
+
+    if g:tag_stack_visibility
+        let tag_stack_winnr = bufwinnr('__call_stack__')
+        if tag_stack_winnr == -1
+            let size = len(s:tag_stack)
+            call s:debug('Current TagStack len is '.size)
+
+            let cmd_split_window = 'silent keepalt ' . (size + 1). 'split' . '__call_stack__'
+            set splitbelow
+            execute cmd_split_window
+            for tag_entry in s:tag_stack
+                execute "normal Gi".tag_entry."\<Cr>\<Esc>"
+            endfor
+            execute "normal \<c-w>\<c-w>"
+        else
+            call s:goto_win(tag_stack_winnr)
+            execute "q!"
+            call s:DisplayTagStack()
+        endif
+    endif
 endfunction
 
 function! jump#Jump()
