@@ -33,12 +33,23 @@ function! s:goto_win(winnr, ...) abort
 endfunction
 
 let g:currentWord=''
+let s:tag_stack_size_display = 1
 function! jump#JumpForward()
     call s:debug('JumpForward called')
 
     let currentWord = escape(expand('<cword>'), '\')
     call s:debug('Current word is '.currentWord)
     execute 'tag '.currentWord
+    let s:tag_stack_size_display += 2
+    call s:GetTagStack()
+    call s:DisplayTagStack()
+endfunction
+
+function! jump#JumpBackward()
+    call s:debug('JumpBackward called')
+
+    execute 'pop'
+    let s:tag_stack_size_display -= 1
     call s:GetTagStack()
     call s:DisplayTagStack()
 endfunction
@@ -70,16 +81,20 @@ endfunction
 function! s:DisplayTagStack()
     call s:debug('DisplayTagStack called')
 
-    if g:tag_stack_visibility
+    let tag_stack_display = []
+    let i = 0
+    while i < s:tag_stack_size_display
+        call add(tag_stack_display, s:tag_stack[i])
+        let i += 1
+    endwhile
+
+    if s:tag_stack_size_display  > 2
         let tag_stack_winnr = bufwinnr('__call_stack__')
         if tag_stack_winnr == -1
-            let size = len(s:tag_stack)
-            call s:debug('Current TagStack len is '.size)
-
-            let cmd_split_window = 'silent keepalt ' . (size + 1). 'split' . '__call_stack__'
+            let cmd_split_window = 'silent keepalt ' . (s:tag_stack_size_display + 1). 'split' . '__call_stack__'
             set splitbelow
             execute cmd_split_window
-            for tag_entry in s:tag_stack
+            for tag_entry in tag_stack_display
                 execute "normal Gi".tag_entry."\<Cr>\<Esc>"
             endfor
             execute "normal \<c-w>\<c-w>"
@@ -88,13 +103,12 @@ function! s:DisplayTagStack()
             execute "q!"
             call s:DisplayTagStack()
         endif
-    endif
-endfunction
+    else
+        let tag_stack_winnr = bufwinnr('__call_stack__')
+        call s:goto_win(tag_stack_winnr)
+        execute "q!"
+    endif 
 
-function! jump#Jump()
-    execute "normal \<c-]>"
-    call jump#GetTagStack()
-    call jump#DisplayTagStack()
 endfunction
 
 

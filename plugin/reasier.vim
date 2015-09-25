@@ -11,3 +11,4 @@ command! -nargs=0 Reasier call jump#ToggleWindow()
 command! -nargs=0 ReasierJump call jump#JumpForward()
 
 nnoremap <C-]> :call jump#JumpForward()<cr>
+nnoremap <C-t> : call jump#JumpBackward()<Cr>
