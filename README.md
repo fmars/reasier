@@ -11,6 +11,7 @@ TODO
 -  add gobal toggle for tag stack window visibility
 -  deal with edge cases: <c-]> on token without tag
 -  hit <c-]> but tag no found, hit <c-t> but already reach end of tag stack
+-  hit <c-[> jump to tag most recently popped tag
 
 
 ####tag_stack window
@@ -18,3 +19,6 @@ TODO
 -  jump to corresponding function when hit enter
 -  show help when hit ?
 -  syntax based color and highlight
+
+####Others
+-  switch between cpp and hpp files
