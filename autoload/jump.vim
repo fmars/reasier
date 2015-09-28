@@ -52,7 +52,6 @@ endfunction
 
 function! jump#JumpBackward()
     call s:debug('JumpBackward called')
-
     execute 'pop'
     let s:tag_stack_size_display -= 1
     call s:GetTagStack()
@@ -100,12 +99,19 @@ function! s:DisplayTagStack()
         let tag_stack_winnr = bufwinnr('__call_stack__')
         call s:debug('tag_stack_winnr' + tag_stack_winnr)
         if tag_stack_winnr == -1
-            let cmd_split_window = 'silent keepalt ' . (s:tag_stack_size_display + 1). 'split' . '__call_stack__'
+            let cmd_split_window = 'silent keepalt ' . (s:tag_stack_size_display). 'split' . '__call_stack__'
             set splitbelow
             execute cmd_split_window
-            for tag_entry in tag_stack_display
-                execute "normal Gi".tag_entry."\<Cr>\<Esc>"
-            endfor
+
+            let i = 0
+            while i < s:tag_stack_size_display - 1
+                execute "normal Gi".tag_stack_display[i]."\<Cr>\<Esc>"
+                let i += 1
+            endwhile
+            let part_str = strpart(tag_stack_display[i], 1)
+            let str = '>'.part_str 
+            execute "normal Gi".str."\<Esc>"
+
             execute "normal \<c-w>\<c-w>"
         else
             call s:debug('Window already exists. Close it first')
