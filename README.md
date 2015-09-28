@@ -3,7 +3,7 @@ When read a big codebase by vim, jump back and forth between functions and files
 
 After thinking those things in head so many times, I decided to write them down. So Reasier comes which named for make you read easier. It inclueds couple small features like visualize tag stack, highlight current word, etc.
 
-![screenshot1](http://imgur.com/WrqFZzg)
+![screenshot1](http://i.imgur.com/WrqFZzg.png)
 
 TODO
 ####Main window 
