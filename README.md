@@ -1,7 +1,9 @@
-# reasier ( make you read easier )
-side project.
-It's very common to use vim to read some codebase. And it's also very common that when I use vim I'm thinking what if vim can do blablabla then that's would be wonderful.
-So I tried to implement all those functionalities what I want to have when I use vim to read source code. .
+# Reasier (make you read easier)
+When read a big codebase by vim, jump back and forth between functions and files, I'm usually thinkg that it would be wonderful if vim could do this, it would be great if vim could do that. It would definitely boost my reading or cooding speed.
+
+After thinking those things in head so many times, I decided to write them down. So Reasier comes which named for make you read easier. It inclueds couple small features like visualize tag stack, highlight current word, etc.
+
+![screenshot1](http://imgur.com/WrqFZzg)
 
 TODO
 ####Main window 
