@@ -39,10 +39,15 @@ function! jump#JumpForward()
 
     let currentWord = escape(expand('<cword>'), '\')
     call s:debug('Current word is '.currentWord)
-    execute 'tag '.currentWord
-    let s:tag_stack_size_display += 2
-    call s:GetTagStack()
-    call s:DisplayTagStack()
+    silent! execute 'tag '.currentWord
+    let error_msg = 'E426: tag not found: '.currentWord
+    if error_msg != v:errmsg
+        let s:tag_stack_size_display += 1
+        call s:GetTagStack()
+        call s:DisplayTagStack()
+    else
+        echo v:errmsg
+    endif
 endfunction
 
 function! jump#JumpBackward()
@@ -81,15 +86,19 @@ endfunction
 function! s:DisplayTagStack()
     call s:debug('DisplayTagStack called')
 
+    call s:debug('Construct display tag stack')
     let tag_stack_display = []
     let i = 0
+
     while i < s:tag_stack_size_display
+        call s:debug(printf("%d", i))
         call add(tag_stack_display, s:tag_stack[i])
         let i += 1
     endwhile
 
-    if s:tag_stack_size_display  > 2
+    if s:tag_stack_size_display  > 1
         let tag_stack_winnr = bufwinnr('__call_stack__')
+        call s:debug('tag_stack_winnr' + tag_stack_winnr)
         if tag_stack_winnr == -1
             let cmd_split_window = 'silent keepalt ' . (s:tag_stack_size_display + 1). 'split' . '__call_stack__'
             set splitbelow
@@ -99,56 +108,16 @@ function! s:DisplayTagStack()
             endfor
             execute "normal \<c-w>\<c-w>"
         else
+            call s:debug('Window already exists. Close it first')
             call s:goto_win(tag_stack_winnr)
             execute "q!"
             call s:DisplayTagStack()
         endif
     else
+        call s:debug('No available display tag remained. Close it')
         let tag_stack_winnr = bufwinnr('__call_stack__')
         call s:goto_win(tag_stack_winnr)
         execute "q!"
     endif 
 
-endfunction
-
-
-let s:dep=0
-
-function! jump#FuncResize()
-    let s:f=5
-    execute "normal :resize 5\<CR>"
-    echo "normal :resize ".s:dep."\<CR>"
-endfunction
-
-function! jump#FuncPush()
-    let s:str=getline(".")
-    if s:dep==0
-        set splitbelow
-        execute '1split traceback'
-        execute "normal Gi".s:str."\<Esc>"
-        execute "normal \<c-w>\<c-w>"
-    else
-        execute "normal \<c-w>\<c-w>"
-        let s:size=s:dep+1
-        execute "normal :resize ".s:size."\<cr>"
-        execute "normal Go".s:str."\<Esc>"
-        execute "normal \<Esc>"
-        execute "normal \<c-w>\<c-w>"
-    endif
-    let s:dep+=1
-endfunction
-
-function! jump#FuncPop()
-    let s:dep-=1
-    if s:dep==0
-        execute "normal \<c-w>\<c-w>"
-        execute "normal :q!\<CR>"
-    elseif s:dep >0
-        execute "normal \<c-w>\<c-w>"
-        let s:size=s:dep+1
-        execute "normal :resize ".s:size."\<cr>"
-        execute "normal Gdd"
-        execute "normal \<Esc>"
-        execute "normal \<c-w>\<c-w>"
-    endif
 endfunction
