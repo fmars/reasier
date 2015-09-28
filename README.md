@@ -21,6 +21,7 @@ TODO
 -  jump to corresponding function when hit enter
 -  show help when hit ?
 -  syntax based color and highlight
+-  automatic close the tag_stack window when main window is closed
 
 ####Others
 -  switch between cpp and hpp files
