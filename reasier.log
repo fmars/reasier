@@ -4,3 +4,24 @@ Current word is DisplayTagStack
 Current TagStack len is 2
 DisplayTagStack called
 Current TagStack len is 2
+JumpBackward called
+                    GetTagStack called
+Current TagStack len is 2
+DisplayTagStack called
+Construct display tag stack
+No available display tag remained. Close it
+goto_win(): -1wincmd w, 0
+JumpBackward called
+                    GetTagStack called
+Current TagStack len is 2
+DisplayTagStack called
+Construct display tag stack
+No available display tag remained. Close it
+goto_win(): -1wincmd w, 0
+JumpBackward called
+                    GetTagStack called
+Current TagStack len is 2
+DisplayTagStack called
+Construct display tag stack
+No available display tag remained. Close it
+goto_win(): -1wincmd w, 0

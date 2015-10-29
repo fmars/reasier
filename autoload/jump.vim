@@ -112,10 +112,25 @@ function! s:DisplayTagStack()
             let str = '>'.part_str 
             execute "normal Gi".str."\<Esc>"
 
+            setlocal filetype=reasier
+
+            setlocal noreadonly " in case the "view" mode is used
+            setlocal buftype=nofile
+            setlocal bufhidden=hide
+            setlocal noswapfile
+            setlocal nobuflisted
+            setlocal nomodifiable
+            setlocal nolist
+            setlocal nowrap
+            setlocal winfixwidth
+            setlocal textwidth=0
+            setlocal nospell
+
             execute "normal \<c-w>\<c-w>"
         else
             call s:debug('Window already exists. Close it first')
             call s:goto_win(tag_stack_winnr)
+            setlocal modifiable
             execute "q!"
             call s:DisplayTagStack()
         endif

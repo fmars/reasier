@@ -9,6 +9,7 @@ nnoremap <leader>j :call jump#Jump()<cr>
 nnoremap <F7> :ReasierJump<Cr>
 command! -nargs=0 Reasier call jump#ToggleWindow()
 command! -nargs=0 ReasierJump call jump#JumpForward()
+command! -nargs=0 Rshelp call new#ToggleHelp()
 
-nnoremap <C-]> :call jump#JumpForward()<cr>
-nnoremap <C-t> : call jump#JumpBackward()<Cr>
+nnoremap <C-]> :call new#JumpForward()<cr>
+nnoremap <C-t> : call new#JumpBackward()<Cr>
