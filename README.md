@@ -25,3 +25,5 @@ TODO
 
 ####Others
 -  switch between cpp and hpp files
+-  Vim, jump to beginning of a function from any point in the mid
+
