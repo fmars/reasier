@@ -1,15 +1,14 @@
+" ======================================
+" High Light Search
+" ======================================
 command! -nargs=0 SHLSearch call search#SingleHighLightToggle()
 nnoremap <silent> <expr> <leader>f search#SingleHighLightToggle()
 
-nnoremap <leader>g :call jump#GetTagStack()<cr>
-nnoremap <leader>d :call jump#DisplayTagStack()<cr>
-nnoremap <leader>j :call jump#Jump()<cr>
+" ======================================
+" Tag Stack
+" ======================================  
+command! -nargs=0 ReasierDebug call jump#ToggleDebug()
 
-
-nnoremap <F7> :ReasierJump<Cr>
-command! -nargs=0 Reasier call jump#ToggleWindow()
-command! -nargs=0 ReasierJump call jump#JumpForward()
-command! -nargs=0 Rshelp call new#ToggleHelp()
-
-nnoremap <C-]> :call new#JumpForward()<cr>
-nnoremap <C-t> : call new#JumpBackward()<Cr>
+nnoremap <C-]> :call jump#JumpForward()<Cr>
+nnoremap <C-t> :call jump#JumpBackward()<Cr>
+nnoremap <leader>t :call jump#ToggleTagStack()<Cr>

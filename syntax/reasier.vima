@@ -5,11 +5,14 @@
 " Website:     http://majutsushi.github.com/tagbar/
 " Version:     2.6.1
 
+scriptencoding utf-8
+
 if exists("b:current_syntax")
     finish
 endif
 
-echom 'Our syntax hl will go here'
+syntax keyword potionKeyword TO FROM in
+highlight link potionKeyword Keyword
 
 
 let b:current_syntax = "reasier"
