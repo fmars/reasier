@@ -11,9 +11,14 @@ if exists("b:current_syntax")
     finish
 endif
 
-syntax keyword potionKeyword TO FROM in
-highlight link potionKeyword Keyword
+syntax keyword reasierKeyword TO FROM
+highlight link reasierKeyword Keyword
 
+syntax match reasierHelp      '^".*' 
+highlight default link reasierHelp Comment
+
+syntax match reasierPtr "^>.*"
+highlight default reasierPtr guifg=Red ctermfg=Red
 
 let b:current_syntax = "reasier"
 

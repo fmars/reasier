@@ -1,8 +1,8 @@
 " ======================================
 " High Light Search
 " ======================================
-command! -nargs=0 SHLSearch call search#SingleHighLightToggle()
-nnoremap <silent> <expr> <leader>f search#SingleHighLightToggle()
+command! -nargs=0 SHLSearch call widget#SingleHighLightToggle()
+nnoremap <silent> <expr> <leader>f widget#SingleHighLightToggle()
 
 " ======================================
 " Tag Stack

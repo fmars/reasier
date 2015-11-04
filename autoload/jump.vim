@@ -120,7 +120,7 @@ endfunction
 
 function! s:GetHelpContent()
     if s:toggle_tag_stack_help == 0
-        return ['press ? for help']
+        return ['" press ? for help']
     else
         let help_content = []
         let help_content += ['" Reasier Keybindings']
@@ -179,9 +179,11 @@ endfunction
 
 function! jump#JumpBackward()
     call s:debug('JumpBackward called')
-    execute 'pop'
-    let s:tag_stack_ptr -= 1
-    call s:Render()
+    if s:tag_stack_ptr >= 0
+        execute 'pop'
+        let s:tag_stack_ptr -= 1
+        call s:Render()
+    endif
 endfunction
 
 function! jump#ToggleHelp()
