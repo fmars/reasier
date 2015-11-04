@@ -27,3 +27,4 @@ TODO
 -  switch between cpp and hpp files
 -  Vim, jump to beginning of a function from any point in the mid
 -  All the window, control by keyboard
+-  toggle paste mode
