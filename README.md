@@ -28,3 +28,6 @@ TODO
 -  Vim, jump to beginning of a function from any point in the mid
 -  All the window, control by keyboard
 -  toggle paste mode
+
+####Fixes
+-  unexpected close file when hit <C-t> and tag stack is empty
