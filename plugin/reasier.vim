@@ -12,5 +12,10 @@ command! -nargs=0 ReasierDebug call jump#ToggleDebug()
 nnoremap <C-]> :call jump#JumpForward()<Cr>
 nnoremap <C-t> :call jump#JumpBackward()<Cr>
 nnoremap <leader>t :call jump#ToggleTagStack()<Cr>
+<<<<<<< HEAD
 " autocmd WinLeave * :call jump#AutoClose()<Cr>
 
+=======
+
+autocmd BufDelete *:echom 'deleted'
+>>>>>>> f6df0f5009259633bb602b163c074b3dc2b30678

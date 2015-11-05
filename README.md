@@ -31,3 +31,10 @@ TODO
 
 ####Fixes
 -  unexpected close file when hit <C-t> and tag stack is empty
+-  if any kinds of 'tag not found' will break reasier
+-  multiple entry of one tag
+
+
+#### TODO
+-  auto close tag stack if main file is closed
+-  mosh issue if .swp exists
