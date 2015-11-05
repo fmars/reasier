@@ -12,3 +12,5 @@ command! -nargs=0 ReasierDebug call jump#ToggleDebug()
 nnoremap <C-]> :call jump#JumpForward()<Cr>
 nnoremap <C-t> :call jump#JumpBackward()<Cr>
 nnoremap <leader>t :call jump#ToggleTagStack()<Cr>
+
+autocmd BufDelete *:echom 'deleted'

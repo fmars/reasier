@@ -164,6 +164,8 @@ endfunction
 " ======================================
 function! jump#JumpForward()
     call s:debug('JumpForward called')
+    if ! s:toggle_tag_stack
+        return
 
     let currentWord = escape(expand('<cword>'), '\')
     call s:debug('Current word is '.currentWord)
@@ -179,6 +181,9 @@ endfunction
 
 function! jump#JumpBackward()
     call s:debug('JumpBackward called')
+    if ! s:toggle_tag_stack
+        return
+
     if s:tag_stack_ptr >= 0
         execute 'pop'
         let s:tag_stack_ptr -= 1
