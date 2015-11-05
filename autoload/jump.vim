@@ -1,14 +1,16 @@
 " ======================================
 " Model  
 " ======================================
-" tag stack pointer points to the index of last tag
-let s:tag_stack_ptr = -1 
+let s:tag_stack_ptr = -1 " tag stack pointer points to the index of last tag
 let s:toggle_tag_stack = 1
+let s:toggle_tag_stack_visibility = 1
 let s:toggle_tag_stack_help = 0
 let s:toggle_debug = 0
 
 let s:tag_stack_win_name = '__call_stack__'
 let s:debug_file = 'reaser.log'
+
+let s:source_file_win = ''
 
 " ======================================
 " debug
@@ -28,6 +30,12 @@ function! s:debug(msg)
         silent echon a:msg . "\n"
         redir END
     endif
+endfunction
+
+" ======================================
+" auto close
+" ======================================
+function! s:AutoClose()
 endfunction
 
 " ======================================
@@ -76,7 +84,7 @@ function! s:Render()
     let help_content = s:GetHelpContent()
     let tag_stack = s:GetTagStack()
 
-    if s:toggle_tag_stack && s:tag_stack_ptr >= 0
+    if s:toggle_tag_stack && s:toggle_tag_stack_visibility && s:tag_stack_ptr >= 0
 
         let content = s:GenContent(help_content, tag_stack) 
         let split_win_cmd = 'silent keepalt ' . (len(content)). 'split' . s:tag_stack_win_name
@@ -166,33 +174,61 @@ function! jump#JumpForward()
     call s:debug('JumpForward called')
 
     let currentWord = escape(expand('<cword>'), '\')
-    call s:debug('Current word is '.currentWord)
-    silent! execute 'tag '.currentWord
-    let error_msg = 'E426: tag not found: '.currentWord
-    if error_msg != v:errmsg
-        let s:tag_stack_ptr += 1
-        call s:Render()
+    if s:toggle_tag_stack == 0
+        execute 'tag '.currentWord
     else
-        echo v:errmsg
+        call s:debug('Current word is '.currentWord)
+
+        " silent! execute 'tag '.currentWord 
+        " comment out silent execute because the case of
+        " multiple entries for one tag 
+        " user input is needed
+
+        " let error_msg = 'E426: tag not found: '.currentWord
+        " comment out E426 because not only E426 will result
+        " into tag not found 
+        " instead we directly check if 'not found' in errmsg
+        
+        let error_msg_sign = 'not found'
+        execute 'tag '.currentWord
+        if stridx(v:errmsg, error_msg_sign) == -1
+            let s:tag_stack_ptr += 1
+            call s:Render()
+        else 
+            let v:errmsg = ''
+            " reset v:errmsg to avoid remained value effect 
+            " next time condition check
+        endif
     endif
 endfunction
 
 function! jump#JumpBackward()
     call s:debug('JumpBackward called')
-    if s:tag_stack_ptr >= 0
+    if s:toggle_tag_stack == 0
         execute 'pop'
-        let s:tag_stack_ptr -= 1
-        call s:Render()
+    else
+        if s:tag_stack_ptr >= 0
+            execute 'pop'
+            let s:tag_stack_ptr -= 1
+            call s:Render()
+        endif
     endif
 endfunction
 
 function! jump#ToggleHelp()
-    let s:toggle_tag_stack_help = 1 - s:toggle_tag_stack_help 
+    let s:toggle_tag_stack_help = 1 - s:toggle_tag_stack__help 
     call s:Render()
 endfunction
 
 function! jump#ToggleTagStack()
     let s:toggle_tag_stack = 1 - s:toggle_tag_stack
+    echom 'TagStack Toggle = '.string(s:toggle_tag_stack)
+    call s:Render()
+endfunction
+
+function! jump#ToggleTagStackVisibility()
+    let s:toggle_tag_stack_visibility = 1 - s:toggle_tag_stack_visibility
+    echom 'TagStackVisibility Toggle = '.string(s:toggle_tag_stack_visibility)
     call s:Render()
 endfunction
 
