@@ -18,7 +18,7 @@ Then here Reasier comes to help, to make read source code easier, in tiny extent
 
 Then reload vim and check out `:help Reasier.txt`.
 
-![screenshot1](http://i.imgur.com/WrqFZzg.png)
+![screenshot1](http://i.imgur.com/9BQ4PUD.gifv)
 
 ## Dependencies
 [Exuberant ctags 5.5](http://ctags.sourceforge.net/)
@@ -68,3 +68,5 @@ TODO
        width="80" height="15" alt="WTFPL" /></a>
        
 <blockquote class="imgur-embed-pub" lang="en" data-id="9BQ4PUD"><a href="//imgur.com/9BQ4PUD">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+[Imgur](http://i.imgur.com/9BQ4PUD.gifv)
