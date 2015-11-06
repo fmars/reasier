@@ -3,9 +3,7 @@
 ## Intro
 Reasier is a combo of small pieces of shut. Each of them has fkuced me up for some period of time. Eventually I cannot stand it and decided to do something. 
 
-<a href="http://gfycat.com/WeeGrizzledFruitbat">
-![2014-10-22 11_35_09](http://zippy.gfycat.com/AlarmingWellwornFalcon.gif)
-</a>
+![Output sample](https://github.com/fmars/reasier/blob/master/new.gif)
 
 ## What
 When you try to understanding some unfamiliar codebase, you wanna
