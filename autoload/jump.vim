@@ -214,7 +214,7 @@ function! jump#JumpBackward()
 endfunction
 
 function! jump#ToggleHelp()
-    let s:toggle_tag_stack_help = 1 - s:toggle_tag_stack__help 
+    let s:toggle_tag_stack_help = 1 - s:toggle_tag_stack_help 
     call s:Render()
 endfunction
 
