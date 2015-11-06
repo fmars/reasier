@@ -1,12 +1,13 @@
 # Reasier (make Read easier) 
-<a href="http://www.wtfpl.net/"><img
-       src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
-       width="80" height="15" alt="WTFPL" /></a>
 
 ## Intro
-When read a big codebase by vim, jump back and forth between functions and files, I'm usually thinkg that it would be wonderful if vim could do this, it would be great if vim could do that. It would definitely boost my reading or cooding speed.
+Reasier is a combo of small pieces of shut. Each of them has fkuced me up for some period of time. Eventually I cannot stand it and decided to do something. 
 
-After thinking those things in head so many times, I decided to write them down. So Reasier comes which named for make you read easier. It inclueds couple small features like visualize tag stack, highlight current word, etc.
+When you try to understanding some unfamiliar codebase, you wanna
+* figure out where are you after jumping back and forth by ctags <C-]>, 
+* just highlight current variable without jumping to anywhere else
+
+Then here Reasier comes to help, to make read source code easier, in tiny extent. It inclueds couple small features like visualize tag stack, highlight current word, toggle paste mode (lol) etc.
 
 ![screenshot1](http://i.imgur.com/WrqFZzg.png)
 
@@ -44,3 +45,7 @@ TODO
 
 #### TODO
 -  mosh issue if .swp exists
+
+<a href="http://www.wtfpl.net/"><img
+       src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
+       width="80" height="15" alt="WTFPL" /></a>
