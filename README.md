@@ -3,6 +3,10 @@
 ## Intro
 Reasier is a combo of small pieces of shut. Each of them has fkuced me up for some period of time. Eventually I cannot stand it and decided to do something. 
 
+<a href="http://gfycat.com/WeeGrizzledFruitbat">
+![2014-10-22 11_35_09](http://zippy.gfycat.com/AlarmingWellwornFalcon.gif)
+</a>
+
 ## What
 When you try to understanding some unfamiliar codebase, you wanna
 * figure out where are you after jumping back and forth by ctags <C-]>, 
@@ -18,7 +22,15 @@ Then here Reasier comes to help, to make read source code easier, in tiny extent
 
 Then reload vim and check out `:help Reasier.txt`.
 
-![screenshot1](http://i.imgur.com/9BQ4PUD.gifv)
+<a href="http://gfycat.com/WeeGrizzledFruitbat">
+![2014-10-22 11_35_09](http://zippy.gfycat.com/AlarmingWellwornFalcon.gif)
+</a>
+
+<iframe src="http://gfycat.com/ifr/AlarmingWellwornFalcon" frameborder="0" scrolling="no" width="2560" height="1440" style="-webkit-backface-visibility: hidden;-webkit-transform: scale(1);" ></iframe>
+
+<img class="gfyitem" data-id="AlarmingWellwornFalcon" />
+
+<iframe src="http://gfycat.com/ifr/AlarmingWellwornFalcon" frameborder="0" scrolling="no" width="2560" height="1440" style="-webkit-backface-visibility: hidden;-webkit-transform: scale(1);" ></iframe>
 
 ## Dependencies
 [Exuberant ctags 5.5](http://ctags.sourceforge.net/)
@@ -68,5 +80,3 @@ TODO
        width="80" height="15" alt="WTFPL" /></a>
        
 <blockquote class="imgur-embed-pub" lang="en" data-id="9BQ4PUD"><a href="//imgur.com/9BQ4PUD">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-
-[Imgur](http://i.imgur.com/9BQ4PUD.gifv)
