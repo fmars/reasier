@@ -66,3 +66,5 @@ TODO
 <a href="http://www.wtfpl.net/"><img
        src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
        width="80" height="15" alt="WTFPL" /></a>
+       
+<blockquote class="imgur-embed-pub" lang="en" data-id="9BQ4PUD"><a href="//imgur.com/9BQ4PUD">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
