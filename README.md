@@ -1,4 +1,7 @@
-# Reasier (make you read easier)
+# Reasier (make you read easier) 
+<a href="http://www.wtfpl.net/"><img
+       src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
+       width="80" height="15" alt="WTFPL" /></a>
 When read a big codebase by vim, jump back and forth between functions and files, I'm usually thinkg that it would be wonderful if vim could do this, it would be great if vim could do that. It would definitely boost my reading or cooding speed.
 
 After thinking those things in head so many times, I decided to write them down. So Reasier comes which named for make you read easier. It inclueds couple small features like visualize tag stack, highlight current word, etc.
