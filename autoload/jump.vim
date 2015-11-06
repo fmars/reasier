@@ -7,7 +7,7 @@ let s:toggle_tag_stack_visibility = 1
 let s:toggle_tag_stack_help = 0
 let s:toggle_debug = 0
 
-let s:tag_stack_win_name = '__call_stack__'
+let s:tag_stack_buf_name = '__call_stack__'
 let s:debug_file = 'reaser.log'
 
 let s:source_file_win = ''
@@ -33,12 +33,6 @@ function! s:debug(msg)
 endfunction
 
 " ======================================
-" auto close
-" ======================================
-function! s:AutoClose()
-endfunction
-
-" ======================================
 " Viewer
 " ======================================
 function! s:GoToWin(winnr, ...) abort
@@ -58,13 +52,17 @@ endfunction
 function! s:CloseWin()
     call s:debug('CloseWin() Start')
 
-    let tag_stack_winnr = bufwinnr(s:tag_stack_win_name)
+    let tag_stack_winnr = bufwinnr(s:tag_stack_buf_name)
     if tag_stack_winnr == -1
         return
     endif
 
     if winnr() == tag_stack_winnr
-        close
+        if tag_stack_winnr == 1
+            execute 'quit'
+        else
+            close
+        endif
     else
         let cur_winnr = winnr()
         call s:GoToWin(tag_stack_winnr)
@@ -87,7 +85,7 @@ function! s:Render()
     if s:toggle_tag_stack && s:toggle_tag_stack_visibility && s:tag_stack_ptr >= 0
 
         let content = s:GenContent(help_content, tag_stack) 
-        let split_win_cmd = 'silent keepalt ' . (len(content)). 'split' . s:tag_stack_win_name
+        let split_win_cmd = 'silent keepalt ' . (len(content)). 'split' . s:tag_stack_buf_name
         set splitbelow
         execute split_win_cmd 
         setlocal modifiable
@@ -235,3 +233,21 @@ endfunction
 function! jump#ToggleDebug()
     let s:toggle_debug = 1 - s:toggle_debug
 endfunction
+
+" ======================================
+" auto close
+" ======================================
+function! jump#AutoClose()
+    call s:debug('AutoClose called')
+    let tag_stack_winnr = bufwinnr(s:tag_stack_buf_name)
+    call s:debug('Current tag_stack_winnr = '.string(tag_stack_winnr))
+    if tag_stack_winnr == -1
+        return
+    endif
+    if tag_stack_winnr == 1
+        call s:CloseWin()
+    endif
+    call s:debug('AutoClose done')
+endfunction
+
+
