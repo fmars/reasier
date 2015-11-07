@@ -29,6 +29,8 @@ Please read plugin/config.vim file before using. It contains some simple setting
 ## Demo
 I use quicktime player to record, and [ffmpeg, gifsicle](https://gist.github.com/dergachev/4627207) to convert to gif.
 
-Now let's see this shit.
+Now let's take a look at this shit.
 ![Screencapture GIF](https://github.com/fmars/reasier/blob/master/demo.gif)
+Alright this is some screenshot : (
+![Screenshot](https://github.com/fmars/reasier/blob/master/demo.png)
 
