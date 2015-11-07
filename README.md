@@ -40,7 +40,6 @@ Alright this is the screenshot : (
 - Just do as the same \<c-]> and \<c-t> as how to use tag to jump. Use \<leader>t to toggle tag_stack
 - Use \<leader>f to highlight current word without jumping to somewhere else like what does 'gd' and '*' do
 - Use \<leader>p to toggle paste mode. (to whom paste a lot like me)
-- 
 
 ## FQA
 > Hey my \<esc> doesn't work, what happened?
