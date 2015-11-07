@@ -41,7 +41,7 @@ Alright this is the screenshot : (
 - Use \<leader>f to highlight current word without jumping to somewhere else like what does 'gd' and '*' do
 - Use \<leader>p to toggle paste mode. (to whom paste a lot like me)
 
-## FQA
+## FAQ
 > Hey my \<esc> doesn't work, what happened?
 
 * Type 'kj' in either insert mode or visual mode. If you don't like this, remove these from plugin/config.vim
