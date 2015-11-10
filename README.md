@@ -1,7 +1,7 @@
 # Reasier (make Read easier) 
 
 ## Intro
-Reasier is a combo of small pieces of shut. Each of them has fkuced me up for some period of time. Eventually I cannot stand it and decided to do something. 
+Reasier tries to sovle a combo of small problems each of which  has fkuced me up for some period of time. Eventually I cannot stand it and decided to do something. 
 
 
 ## What
