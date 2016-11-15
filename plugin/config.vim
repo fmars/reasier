@@ -17,6 +17,11 @@ vnoremap kj <Esc>
 inoremap <Esc> <Nop>
 vnoremap <Esc> <Nop>
 
+nnoremap <left> <Nop>
+nnoremap <right> <Nop>
+nnoremap <down> <Nop>
+nnoremap <up> <Nop>
+
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 nnoremap <leader>q :q!<cr>
