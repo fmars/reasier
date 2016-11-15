@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/fjc/.vim/bundle/tagbar/plugin'
+let g:netrw_dirhist_2='/Users/fjc/Documents/test/py'
+let g:netrw_dirhist_3='/Users/fjc/.vim'
+let g:netrw_dirhist_4='/Users/fjc/Documents/Codebases/pulp'
